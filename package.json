@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bip32": "^2.0.5",
+    "bip39": "^3.0.2",
+    "commander": "^5.0.0",
+    "ethereumjs-util": "^6.2.0",
+    "ethers": "^4.0.46",
+    "prompt": "^1.0.0"
+  }
+}
