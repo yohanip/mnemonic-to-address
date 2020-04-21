@@ -5,6 +5,7 @@
     "commander": "^5.0.0",
     "ethereumjs-util": "^6.2.0",
     "ethers": "^4.0.46",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "qrcode-terminal": "^0.12.0"
   }
 }

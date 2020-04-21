@@ -2,6 +2,7 @@ const { program } = require('commander');
 const ethers = require("ethers");
 const bip39 = require("bip39");
 const prompt = require("prompt");
+const qrcode = require("qrcode-terminal");
 
 /*
 program ini digunakan untuk 
@@ -47,22 +48,24 @@ program
       if (['eth', 'etc', 'tt'].findIndex(v => v == chain) >= 0) {
         if (ethers.utils.HDNode.isValidMnemonic(mnemonic)) {
           const rootNode = ethers.utils.HDNode.fromMnemonic(mnemonic);
-          console.log(rootNode.extendedKey);
+          // console.log(rootNode.extendedKey);
 
           // 44'/60'/0'
           const coin = knownChain[chain];
           let coinId = parseInt(coin);
           if (isNaN(coinId) || !isFinite(coinId)) return console.error("INVALID COIN", coin, chain);
           const accountExtendedNode = rootNode.derivePath(`44'/${coinId}'/0'`);
-          console.log(accountExtendedNode.extendedKey);
+          // console.log(accountExtendedNode.extendedKey);
 
           // 44'/60'/0'/0
           const extendedNode = accountExtendedNode.derivePath('0');
-          console.log(extendedNode.extendedKey);
+          // console.log(extendedNode.extendedKey);
 
           if (!path) path = '0';
           const addressNode = extendedNode.derivePath(path);
-          console.log(addressNode.address);
+          const address = addressNode.address;
+          qrcode.generate(address);
+          console.log(address);
         } else {
           console.error("Invalid Mnemonic")
         }
